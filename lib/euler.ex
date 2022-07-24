@@ -1,18 +1,12 @@
 defmodule EULER do
-  @moduledoc """
-  Documentation for `EULER`.
-  """
+  def main do
+    case isDivibleby3(5) do
+      0 -> IO.puts("Yes!")
+      _ -> IO.puts("No!")
+    end
+  end
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> EULER.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def isDivibleby3(x) do
+    (rem x,3) == 0
   end
 end
