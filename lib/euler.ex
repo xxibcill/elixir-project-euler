@@ -1,8 +1,8 @@
 defmodule EULER do
   def main do
     case isDivibleby3(5) do
-      0 -> IO.puts("Yes!")
-      _ -> IO.puts("No!")
+      0 -> :yes
+      _ -> :no
     end
   end
 
