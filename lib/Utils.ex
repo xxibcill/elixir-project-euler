@@ -21,7 +21,7 @@ defmodule Utils do
 
   # fibonacci sequence under x value
   def fiboSeqUnderX(x, seq \\ [1,1]) when x >= 3 do
-    cond  do
+    cond do
       Enum.at(seq, 0) > x -> seq |> onlyTail |> Enum.reverse
       true -> fiboSeqUnderX(x,[Enum.at(seq, 0) + Enum.at(seq, 1) | seq])
     end
@@ -43,10 +43,39 @@ defmodule Utils do
     Enum.filter(list,fn x -> isPrime(x) end)
   end
 
+  def primeRange(from,to) do
+    Enum.to_list(from..to) |> filterPrime
+  end
+
   def sum(list, accumulator \\ 0) do
     case list do
       [] -> accumulator
       [head | tail] -> sum(tail, accumulator + head)
+    end
+  end
+
+  # naive factorize number
+  def factorize(n) do
+    primes = primeRange(1,n)
+    factorize(n,primes)
+    # cond do
+    #   isPrime(n) -> n
+    #   _ ->
+    # end
+  end
+
+  def factorList({number,factor},primes,list \\ []) do
+    case number do
+      1 -> [factor | list]
+      _ -> factorList(factorize(number,primes),[factor | list])
+    end
+  end
+
+  def factorize(n,primes,count \\ 0) do
+    currentPrime = Enum.at(primes,count)
+    cond do
+      rem(n,currentPrime) == 0 -> {trunc(n/currentPrime),currentPrime}
+      true -> factorize(n,primes,count + 1)
     end
   end
 
