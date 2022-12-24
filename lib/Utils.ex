@@ -79,4 +79,15 @@ defmodule Utils do
     end
   end
 
+  def gcd(a,b) do
+    case a do
+      0 -> b
+      _ -> gcd(rem(b,a),a)
+    end
+  end
+
+  def lcm(a,b) do
+    trunc(a / gcd(a,b))* b
+  end
+
 end
